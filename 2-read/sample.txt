@@ -1,0 +1,9 @@
+% node read-sync.js
+# read-sync: 2.429ms
+
+% node read-async.js
+# read-async: 0.518ms
+
+% ls
+# .idea 0-lesson 1-dnslookup 2-read 3-webserver
+# README.md index.js index.txt package.json protokoll.pdf protokoll.tex

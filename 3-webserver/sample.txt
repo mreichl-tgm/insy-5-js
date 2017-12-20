@@ -1,0 +1,21 @@
+% node webserver.js
+# Server running on http://localhost:8009
+
+% curl localhost:8009/package.json
+# {
+#   "name": "3-webserver",
+#   "version": "1.0.0",
+#   "description": "Entwickle einen Webserver in node.js,
+#                   der die zur im request angefragten url
+#                   gehörende Datei sucht und an den Browser
+#                   zurückgibt ohne die Verwendung von express oder dergleichen.",
+#   "main": "dnslookup.js",
+#   "scripts": {
+#     "test": "echo \"Error: no test specified\" && exit 1"
+#   },
+#   "author": "Markus Reichl",
+#   "license": "MIT"
+# }
+
+% curl localhost:8009/nosuch.file
+# File not found

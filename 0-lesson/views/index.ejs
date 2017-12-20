@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>INSY WebApp</title>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<h1>Student</h1>
+<ul>
+    <% for (student of students) { %>
+        <li><%= student.fname %> <%= student.nname %></li>
+    <% } %>
+</ul>
+
+<form action="/new" method="post">
+    <label>
+        Vorname: <input name="fname"/>
+    </label>
+    <br>
+    <label>
+        Nachname: <input name="lname"/>
+    </label>
+    <input type="submit">
+</form>
+</body>
+</html>

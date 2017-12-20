@@ -1,0 +1,63 @@
+\documentclass{school}
+\usepackage{minted}
+\usemintedstyle{rainbow_dash}
+
+\title{Übungen zu NodeJS}
+\subject{INSY - Webentwicklung}
+\author{Markus Reichl}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}	% Makes the first page fancy too
+
+\tableofcontents
+
+\section{DNS Lookup}
+Es soll ein Programm geschrieben werden, das die IP-Adresse(n) einer Domain ermittelt und ausgiebt. Die Domains (beliebig viele) sollen dabei als Kommandozeilenargument angegeben werden.
+
+\inputminted{javascript}{1-dnslookup/dnslookup.js}
+
+Als Beispiele wurden hier die Adressen von \texttt{tilehub.io} und \texttt{re1.at} abgerufen.
+
+\inputminted{bash}{1-dnslookup/sample.txt}
+
+\newpage
+\section{Auslesen von Dateien}
+Es sollen zwei Programme geschrieben werden, die alle Dateien in einem gegebenen Verzeichnis synchron bzw. asynchron auslesen und ausgeben. Im ersten Fall soll mit dem Einlesen einer Datei erst begonnen werden, wenn die Ausgabe der vorigen Datei fertig ist, im zweiten Fall soll dies parallel geschehen. Welches der beiden Programme ist performanter?
+
+\subsection{Synchron}
+\inputminted{javascript}{2-read/read-sync.js}
+
+\subsection{Asynchron}
+\inputminted{javascript}{2-read/read-async.js}
+
+\subsection{Vergleich}
+\inputminted{bash}{2-read/sample.txt}
+
+Wie man sieht erweist sich die asynchrone Implementierung als performanter, was auf die gleichzeitige Abarbeitung von Lesevorgängen zurückzuführen ist. Da bei einer SSD die Lesezugriffe wesentlich schneller abgearbeitet werden ist hier der Unterschied marginal.
+
+\newpage
+\section{Einfacher Webserver}
+Es soll ohne Express oder dergleichen ein Webserver in node.js entwickelt werden, der die angefragte URL als Datei am Server an den Browser zurückgibt.
+
+\inputminted{javascript}{3-webserver/webserver.js}
+
+Der Webserver ist nach dem Start unter \texttt{http://localhost:8009} erreichbar und reagiert auf nicht vorhandene Dateien mit einem \texttt{404} Header und der Meldung \texttt{File not found}.
+
+\inputminted{bash}{3-webserver/sample.txt}
+
+% Basic Figure
+% \begin{figure}[h]
+%	 \centering
+% 	 \includegraphics[height=4cm]{image.jpg}
+% 	 \caption{Caption}
+% \end{figure}
+
+% Basic bibiography
+% \begin{thebibliography}{9}
+% \bibitem{faz} faz.net, Vergewaltigung live auf Facebook gezeigt \\ http://www.faz.net/aktuell/gesellschaft/kriminalitaet/vergewaltigung-live-auf-facebook-gezeigt-14936872.html
+% \end{thebibliography}
+
+% List of figures
+% \listoffigures
+\end{document}

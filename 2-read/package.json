@@ -1,0 +1,11 @@
+{
+  "name": "2-read",
+  "version": "1.0.0",
+  "description": "Schreibe zwei Programme die alle Dateien in einem gegebenen Verzeichnis synchronbzw. asychron auslesen und ausgeben (siehe fs.readdir()). Im ersten Fall sollen mit dem Einlesen einer Datei erst begonnen werden, wenn die Ausgabe der vorigen Datei fertig ist, im zweiten Fall soll dies parallel geschehen. Welches der beiden Programme ist performanter?"
+  "main": "dnslookup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Markus Reichl",
+  "license": "MIT"
+}
