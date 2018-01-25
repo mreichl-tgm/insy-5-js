@@ -1,0 +1,15 @@
+{
+  "name": "3-webserver",
+  "version": "1.0.0",
+  "description": "Erstelle ein nodejs -  Programm, das sich zur mlab-Datenbank aus dem Unterricht (mongodb://5ahit:5ahit@ds149535.mlab.com:49535/5ahit) verbindet und drei neue Schueler in die students-Collection im richtigen Format hinzufuegt. (Dokumentation zu inserts: https://docs.mongodb.com/manual/tutorial/insert-documents/)",
+  "main": "mongo.js",
+  "dependencies": {
+    "await": "^0.2.6",
+    "mongodb": "^3.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Markus Reichl",
+  "license": "MIT"
+}
