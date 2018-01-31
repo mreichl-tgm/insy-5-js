@@ -3,29 +3,13 @@ const client = mongodb.MongoClient
 // Predefine url
 const url = 'mongodb://5ahit:5ahit@ds149535.mlab.com:49535/5ahit'
 
-function clean() {
-    /**
-     * Clean up the whole student collection from the 5ahit database
-     */
-    client.connect(url, (err, db) => {
-        // Save collection reference
-        let dbc = db.db('5ahit').collection('student')
-        // Remove all students
-        dbc.remove({}, (err, result) => {
-            console.log("Clear database!")
-            db.close()
-        })
-    })
-}
-
 function insert() {
     /**
      * Insert 3 students into 5ahit
      */
     client.connect(url, (err, db) => {
-
         // Save collection reference
-        let dbc = db.db('5ahit').collection('student')
+        let dbc = db.db('5ahit').collection('students')
         // Students to add
         let students = [
             {
@@ -56,7 +40,7 @@ function find() {
      */
     client.connect(url, (err, db) => {
         // Save collection reference
-        let dbc = db.db('5ahit').collection('student')
+        let dbc = db.db('5ahit').collection('students')
         // Find all students
         dbc.find({}).toArray((err, result) => {
             console.log("# Find all students:")
@@ -84,6 +68,60 @@ function find() {
     })
 }
 
-clean()
-setTimeout(insert, 1000)
-setTimeout(find, 1000)
+function find_reduced() {
+    /**
+     * Find some some more things
+     */
+    client.connect(url, (err, db) => {
+        // Save collection reference
+        let dbc = db.db('5ahit').collection('students')
+
+        dbc.mapReduce(() => {
+            emit(this.school_class, this.lights.AM)
+        }, (key, values) => {
+            return values.length
+        }, {
+            query: {'lights.AM': 'red'},
+            out: 'red_lights'
+        }, (err, res) => {
+            console.log("#Find all red lights in AM")
+            console.log(err, res)
+            db.close()
+        })
+
+        dbc.mapReduce(() => {
+            emit(this.lights.AM)
+        }, (key, values) => {
+            return values.length
+        }, {
+            query: {'lights.AM': 'red'},
+            out: 'red_lights'
+        }, (err, res) => {
+            console.log("#Find all red lights in AM")
+            console.log(err, res)
+            db.close()
+        })
+
+        dbc.mapReduce(() => {       // BEGIN MAP
+            // Return if no signal
+            if (!this.signals) return
+            // Iterate over signals
+            this.signals.forEach((elm) => {
+                emit(elm.color, 1)
+            }, (key, values) => {   // BEGIN REDUCE
+                return Array.sum(values)
+            }, {                    // BEGIN QUERY
+                query: {"clazz": "5ahit"},
+                out: {"inline": 1}
+            }, (err, res) => {      // BEGIN RESULT
+                console.log("Find all red lights in AM in 5ahit")
+                console.log(err, res)
+                db.close()
+            })
+        })
+
+    })
+}
+
+find()
+find_reduced()
