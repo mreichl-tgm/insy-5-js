@@ -1,5 +1,6 @@
 ## Witzeclient in Vue.js
 Markus Reichl <mreichl-tgm@re1.at>
+
 2018-03-13
 
 ### Angabe
