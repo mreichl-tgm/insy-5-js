@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Joke client</title>
+    <!-- Bootstrap JS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <!-- Axios for ajax requests -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <!-- VueJS for user interaction -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="app" class="container-fluid pt-5">
+    <div class="container">
+        <div class="form-group">
+            <label for="number-of-jokes">
+                Number of jokes:
+            </label>
+            <!-- Provide an input field for the number of jokes -->
+            <input id="number-of-jokes" type="number" min="0" max="100" v-on:change="getJokes"
+                   v-model.number="numberOfJokes"/>
+            <!-- Call our vue app's getJokes function on click -->
+            <button type="button" class="btn btn-primary" v-on:click="getJokes">Get jokes!</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card my-3" v-for="joke in jokes">
+            <div class="card-block px-3 pt-3">
+                <p>{{ joke }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /**
+     * Requests a given number of jokes and returns the resulting strings as a list
+     *
+     * @param n Number of jokes to request
+     * @returns {Array} List of strings containing hilarious Chuck Norris jokes
+     */
+    function getJokes(n) {
+        let jokes = []
+        axios   // Request a given number of jokes and add the results to the jokes list
+            .get("http://api.icndb.com/jokes/random/" + n)
+            .then(function (res) {
+                for (let obj of res.data.value) jokes.push(obj["joke"])
+            })
+        return jokes
+    }
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            numberOfJokes: 3,   // Create a model for the number of jokes
+            jokes: []           // Create a model for the joke list itself
+        },
+        methods: {
+            // Call getJokes and set the jokes list so the model can adjust
+            getJokes: function () {
+                this.jokes = getJokes(this.numberOfJokes)
+            }
+        }
+    })
+    // Add jokes by default
+    app.getJokes()
+</script>
+</body>
+</html>
