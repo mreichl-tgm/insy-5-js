@@ -14,34 +14,39 @@ Entwickle eine kleine Webanwendung mittels vue.js, welche dazu dient eine bestim
 * Abzugeben ist der relevante sourcecode (samt kurzen Erklaerungen) als PDF.
 
 ### Lösung
-~~~ js
-<script>
-    /**
-     * Requests a given number of jokes and returns the resulting strings as a list
-     *
-     * @param n Number of jokes to request
-     * @returns {Array} List of strings containing hilarious Chuck Norris jokes
-     */
-    function getJokes(n) {
-        let jokes = []
-        axios   // Request a given number of jokes and add the results to the jokes list
-            .get("http://api.icndb.com/jokes/random/" + n)
-            .then(function (res) { for (let obj of res.data.value) jokes.push(obj["joke"]) })
-        return jokes
-    }
+~~~ html
+<!-- Provide an input field for the number of jokes -->
+<input id="number-of-jokes" type="number" min="0" max="100" v-on:change="getJokes" v-model.number="numberOfJokes"/>
+<!-- Call our vue app's getJokes function on click -->
+<button type="button" class="btn btn-primary" v-on:click="getJokes">Get jokes!</button>
+~~~
 
-    const app = new Vue({
-        el: "#app",
-        data: {
-            numberOfJokes: 3,   // Create a model for the number of jokes
-            jokes: []           // Create a model for the joke list itself
-        },
-        methods: {
-            // Call getJokes and set the jokes list so the model can adjust
-            getJokes: function () { this.jokes = getJokes(this.numberOfJokes) }
-        }
-    })
-    // Add jokes by default
-    app.getJokes()
-</script>
+~~~ js
+/**
+ * Requests a given number of jokes and returns the resulting strings as a list
+ *
+ * @param n Number of jokes to request
+ * @returns {Array} List of strings containing hilarious Chuck Norris jokes
+ */
+function getJokes(n) {
+    let jokes = []
+    axios   // Request a given number of jokes and add the results to the jokes list
+        .get("http://api.icndb.com/jokes/random/" + n)
+        .then(function (res) { for (let obj of res.data.value) jokes.push(obj["joke"]) })
+    return jokes
+}
+
+const app = new Vue({
+    el: "#app",
+    data: {
+        numberOfJokes: 3,   // Create a model for the number of jokes
+        jokes: []           // Create a model for the joke list itself
+    },
+    methods: {
+        // Call getJokes and set the jokes list so the model can adjust
+        getJokes: function () { this.jokes = getJokes(this.numberOfJokes) }
+    }
+})
+// Add jokes by default
+app.getJokes()
 ~~~
