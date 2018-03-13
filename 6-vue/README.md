@@ -1,4 +1,7 @@
 ## Witzeclient in Vue.js
+Markus Reichl <mreichl-tgm@re1.at>
+2018-03-13
+
 ### Angabe
 Entwickle eine kleine Webanwendung mittels vue.js, welche dazu dient eine bestimmte Anzahl an Chuck-Norris-Witzen anzuzeigen bestehend aus Folgendem:
 
