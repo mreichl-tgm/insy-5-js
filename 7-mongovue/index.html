@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<main id="app">
+    <select v-model="teacherSelected">
+        <option v-for="t in teachers" :value="t">{{ t.name }}</option>    
+    </select>
+
+    <div>
+        <ul v-if="teacherSelected != null">
+            <li v-for="c in teacherSelected.classes">
+                {{c.clazz}} <span v-for="s in c.subjects">{{s}}</span>
+            </li>
+        </ul>
+    </div>
+</main>
+
+<script>
+var data = {
+    teachers: [],
+    teacherSelected: null
+}
+
+var vm = new Vue({
+    el: '#app',
+    data: data,
+    methods: {
+        load: function() {
+            axios.get('/teachers').then(function(res) {
+                data.teachers = res.data
+            })
+        }    
+    }
+})
+
+vm.load()
+</script>
+</body>
+</html>

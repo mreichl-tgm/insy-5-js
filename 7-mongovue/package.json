@@ -1,0 +1,26 @@
+{
+  "name": "mongovue",
+  "version": "1.0.0",
+  "description": "A vue app with mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mreichl-tgm/insy-5-js.git"
+  },
+  "author": "Markus Reichl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mreichl-tgm/insy-5-js/issues"
+  },
+  "homepage": "https://github.com/mreichl-tgm/insy-5-js#readme",
+  "devDependencies": {
+    "nodemon": "^1.17.2"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongodb": "^3.0.4"
+  }
+}
